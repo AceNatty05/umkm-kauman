@@ -9,13 +9,15 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin Kauman',
-            'phone' => '081234567890',
-            'email' => 'admin@umkmkauman.id',
-            'password' => 'password',
-            'role' => 'admin',
-            'phone_verified' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@umkmkauman.id'],
+            [
+                'name' => 'Admin Kauman',
+                'phone' => '081234567890',
+                'password' => 'password',
+                'role' => 'admin',
+                'phone_verified' => true,
+            ]
+        );
     }
 }
