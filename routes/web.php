@@ -1,0 +1,56 @@
+<?php
+
+use App\Http\Controllers\Auth\OtpController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\UserManagementController;
+use Illuminate\Support\Facades\Route;
+
+// ================================
+// Halaman Publik
+// ================================
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/umkm/{slug}', [HomeController::class, 'showUmkm'])->name('umkm.show');
+
+// ================================
+// Authenticated Routes
+// ================================
+Route::middleware('auth')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Manajemen UMKM
+    Route::resource('manage/umkm', UmkmController::class)->names('umkm');
+    Route::post('manage/umkm/{umkm}/photos', [UmkmController::class, 'uploadPhotos'])->name('umkm.photos.store');
+    Route::delete('manage/umkm/{umkm}/photos/{photo}', [UmkmController::class, 'deletePhoto'])->name('umkm.photos.destroy');
+
+    // Manajemen Produk (nested under UMKM)
+    Route::get('manage/umkm/{umkm}/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('manage/umkm/{umkm}/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('manage/umkm/{umkm}/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('manage/umkm/{umkm}/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('manage/umkm/{umkm}/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::patch('manage/umkm/{umkm}/products/{product}/toggle-star', [ProductController::class, 'toggleStar'])->name('products.toggle-star');
+
+    // Kategori API (AJAX)
+    Route::get('/api/categories', [CategoryController::class, 'index']);
+    Route::post('/api/categories', [CategoryController::class, 'store']);
+
+    // ================================
+    // Admin Only
+    // ================================
+    Route::middleware('role:admin')->group(function () {
+        Route::resource('manage/users', UserManagementController::class)->names('users');
+    });
+});
+
+require __DIR__.'/auth.php';
