@@ -5,18 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Umkm;
-use App\Services\CloudinaryService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
     use AuthorizesRequests;
-
-    public function __construct(private CloudinaryService $cloudinary)
-    {
-    }
 
     /**
      * Form tambah produk.
@@ -60,7 +56,7 @@ class ProductController extends Controller
         }
 
         // Upload foto
-        $photoUrl = $this->cloudinary->upload($request->file('photo'), 'products');
+        $photoUrl = $request->file('photo')->store('products', 'public');
         if (!$photoUrl) {
             return back()->withErrors(['photo' => 'Gagal mengupload foto.'])->withInput();
         }
@@ -116,9 +112,11 @@ class ProductController extends Controller
         }
 
         if ($request->hasFile('photo')) {
-            $photoUrl = $this->cloudinary->upload($request->file('photo'), 'products');
+            $photoUrl = $request->file('photo')->store('products', 'public');
             if ($photoUrl) {
-                $this->cloudinary->delete($product->photo);
+                if ($product->getRawOriginal('photo') && !str_starts_with($product->getRawOriginal('photo'), 'http')) {
+                    Storage::disk('public')->delete($product->getRawOriginal('photo'));
+                }
                 $validated['photo'] = $photoUrl;
             }
         }
@@ -136,6 +134,9 @@ class ProductController extends Controller
     {
         $this->authorize('delete', $product);
 
+        if ($product->getRawOriginal('photo') && !str_starts_with($product->getRawOriginal('photo'), 'http')) {
+            Storage::disk('public')->delete($product->getRawOriginal('photo'));
+        }
         $product->delete();
 
         return redirect()->route('umkm.edit', $umkm)

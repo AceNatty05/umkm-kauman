@@ -5,18 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Umkm;
 use App\Models\UmkmPhoto;
-use App\Services\CloudinaryService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UmkmController extends Controller
 {
     use AuthorizesRequests;
-
-    public function __construct(private CloudinaryService $cloudinary)
-    {
-    }
 
     /**
      * Daftar UMKM — admin: semua, user: miliknya.
@@ -103,8 +99,8 @@ class UmkmController extends Controller
             $validated['category_id'] = $category->id;
         }
 
-        // Upload foto utama ke Cloudinary
-        $photoUrl = $this->cloudinary->upload($request->file('photo'), 'umkm');
+        // Upload foto utama ke storage
+        $photoUrl = $request->file('photo')->store('umkm', 'public');
         if (!$photoUrl) {
             return back()->withErrors(['photo' => 'Gagal mengupload foto. Coba lagi.'])->withInput();
         }
@@ -124,7 +120,7 @@ class UmkmController extends Controller
         // Upload galeri foto
         if ($request->hasFile('gallery')) {
             foreach ($request->file('gallery') as $index => $galleryPhoto) {
-                $url = $this->cloudinary->upload($galleryPhoto, 'umkm/gallery');
+                $url = $galleryPhoto->store('umkm/gallery', 'public');
                 if ($url) {
                     $umkm->photos()->create([
                         'photo_path' => $url,
@@ -181,10 +177,12 @@ class UmkmController extends Controller
 
         // Upload foto baru jika ada
         if ($request->hasFile('photo')) {
-            $photoUrl = $this->cloudinary->upload($request->file('photo'), 'umkm');
+            $photoUrl = $request->file('photo')->store('umkm', 'public');
             if ($photoUrl) {
-                // Hapus foto lama dari Cloudinary
-                $this->cloudinary->delete($umkm->photo);
+                // Hapus foto lama
+                if ($umkm->getRawOriginal('photo') && !str_starts_with($umkm->getRawOriginal('photo'), 'http')) {
+                    Storage::disk('public')->delete($umkm->getRawOriginal('photo'));
+                }
                 $validated['photo'] = $photoUrl;
             }
         }
@@ -203,6 +201,9 @@ class UmkmController extends Controller
     {
         $this->authorize('delete', $umkm);
 
+        if ($umkm->getRawOriginal('photo') && !str_starts_with($umkm->getRawOriginal('photo'), 'http')) {
+            Storage::disk('public')->delete($umkm->getRawOriginal('photo'));
+        }
         $umkm->delete(); // Soft delete
 
         return redirect()->route('umkm.index')
@@ -223,7 +224,7 @@ class UmkmController extends Controller
         if ($request->hasFile('photos')) {
             $maxOrder = $umkm->photos()->max('sort_order') ?? 0;
             foreach ($request->file('photos') as $index => $photo) {
-                $url = $this->cloudinary->upload($photo, 'umkm/gallery');
+                $url = $photo->store('umkm/gallery', 'public');
                 if ($url) {
                     $umkm->photos()->create([
                         'photo_path' => $url,
@@ -243,7 +244,9 @@ class UmkmController extends Controller
     {
         $this->authorize('update', $umkm);
 
-        $this->cloudinary->delete($photo->photo_path);
+        if ($photo->getRawOriginal('photo_path') && !str_starts_with($photo->getRawOriginal('photo_path'), 'http')) {
+            Storage::disk('public')->delete($photo->getRawOriginal('photo_path'));
+        }
         $photo->delete();
 
         return back()->with('success', 'Foto berhasil dihapus.');

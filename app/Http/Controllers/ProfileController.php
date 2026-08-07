@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CloudinaryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    public function __construct(private CloudinaryService $cloudinary)
-    {
-    }
 
     /**
      * Display the user's profile form.
@@ -37,10 +34,10 @@ class ProfileController extends Controller
         ]);
 
         if ($request->hasFile('photo')) {
-            $photoUrl = $this->cloudinary->upload($request->file('photo'), 'users');
+            $photoUrl = $request->file('photo')->store('users', 'public');
             if ($photoUrl) {
-                if ($user->photo) {
-                    $this->cloudinary->delete($user->photo);
+                if ($user->getRawOriginal('photo') && !str_starts_with($user->getRawOriginal('photo'), 'http')) {
+                    Storage::disk('public')->delete($user->getRawOriginal('photo'));
                 }
                 $validated['photo'] = $photoUrl;
             }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -88,5 +89,18 @@ class Product extends Model
             $formatted .= ' / ' . $this->price_unit;
         }
         return $formatted;
+    }
+
+    protected function photo(): Attribute
+    {
+        return Attribute::make(
+            get: function (?string $value) {
+                if (!$value) return null;
+                if (str_starts_with($value, 'http')) {
+                    return $value;
+                }
+                return asset('storage/' . $value);
+            }
+        );
     }
 }
