@@ -23,7 +23,7 @@
         }
     }">
         <div class="text-center mb-10">
-            <h1 class="text-3xl font-bold text-kauman-primary">Infografis Desa Kauman</h1>
+            <h1 class="text-3xl font-bold text-kauman-primary">Kumpulan Infografis</h1>
             <p class="mt-2 text-gray-600">Kumpulan informasi dan poster terkait pengelolaan UMKM</p>
         </div>
 
