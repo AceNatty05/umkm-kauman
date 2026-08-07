@@ -36,6 +36,16 @@ class AuthenticatedSessionController extends Controller
             ])->onlyInput('phone');
         }
 
+        if (!Auth::user()->is_active) {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return back()->withErrors([
+                'phone' => 'Akun Anda belum diverifikasi oleh Admin. Silakan tunggu atau hubungi Admin.',
+            ])->onlyInput('phone');
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard'));
