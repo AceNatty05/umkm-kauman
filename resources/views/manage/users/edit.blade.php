@@ -25,6 +25,12 @@
                 </select>
             </div>
             <div>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', $user->is_active) ? 'checked' : '' }} class="rounded border-gray-300 text-kauman-primary focus:ring-kauman-primary w-5 h-5">
+                    <span class="text-sm font-medium text-gray-700">Akun Aktif</span>
+                </label>
+            </div>
+            <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Password Baru</label>
                 <input type="password" name="password" class="w-full rounded-lg border-gray-300 focus:border-kauman-primary focus:ring-kauman-primary">
                 <p class="text-xs text-gray-400 mt-1">Kosongkan jika tidak ingin mengubah password.</p>

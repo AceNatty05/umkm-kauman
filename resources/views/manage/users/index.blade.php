@@ -20,6 +20,7 @@
                         <th class="px-4 py-3 text-left font-semibold hidden sm:table-cell">WhatsApp</th>
                         <th class="px-4 py-3 text-left font-semibold hidden md:table-cell">Email</th>
                         <th class="px-4 py-3 text-left font-semibold">Role</th>
+                        <th class="px-4 py-3 text-left font-semibold">Status</th>
                         <th class="px-4 py-3 text-left font-semibold">Aksi</th>
                     </tr>
                 </thead>
@@ -36,8 +37,24 @@
                             <span class="text-xs font-medium px-2.5 py-1 rounded-full {{ $user->role === 'admin' ? 'bg-red-100 text-red-700' : 'bg-olive-100 text-olive-700' }}">{{ ucfirst($user->role) }}</span>
                         </td>
                         <td class="px-4 py-3">
-                            <div class="flex gap-1.5">
-                                <a href="{{ route('users.edit', $user) }}" class="text-xs bg-green-500 text-white rounded px-2.5 py-1.5 hover:bg-green-600">Edit</a>
+                            @if($user->is_active)
+                                <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-green-100 text-green-700">Aktif</span>
+                            @else
+                                <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-amber-100 text-amber-700">Pending</span>
+                            @endif
+                        </td>
+                        <td class="px-4 py-3">
+                            <div class="flex gap-1.5 flex-wrap">
+                                @if($user->id !== auth()->id())
+                                <form method="POST" action="{{ route('users.toggle-active', $user) }}">@csrf @method('PATCH')
+                                    @if($user->is_active)
+                                        <button class="text-xs bg-amber-500 text-white rounded px-2.5 py-1.5 hover:bg-amber-600 w-full mb-1">Nonaktifkan</button>
+                                    @else
+                                        <button class="text-xs bg-green-500 text-white rounded px-2.5 py-1.5 hover:bg-green-600 w-full mb-1">Aktivasi</button>
+                                    @endif
+                                </form>
+                                @endif
+                                <a href="{{ route('users.edit', $user) }}" class="text-xs bg-blue-500 text-white rounded px-2.5 py-1.5 hover:bg-blue-600">Edit</a>
                                 @if($user->id !== auth()->id())
                                 <form method="POST" action="{{ route('users.destroy', $user) }}" onsubmit="return confirm('Hapus user ini?')">@csrf @method('DELETE')
                                     <button class="text-xs bg-red-500 text-white rounded px-2.5 py-1.5 hover:bg-red-600">Hapus</button>

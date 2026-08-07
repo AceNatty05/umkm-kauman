@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Services\OtpService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -22,7 +21,7 @@ class RegisteredUserController extends Controller
     /**
      * Step 1: Validasi data & kirim OTP.
      */
-    public function store(Request $request, OtpService $otpService)
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -36,23 +35,14 @@ class RegisteredUserController extends Controller
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
 
-        // Simpan data registrasi di session
-        $request->session()->put('registration_data', [
+        $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
+            'is_active' => false,
         ]);
 
-        // Kirim OTP
-        $result = $otpService->sendOtp($request->phone, 'register');
-
-        if (!$result['success']) {
-            return back()->withErrors(['phone' => $result['message']])->withInput();
-        }
-
-        // Redirect ke halaman verifikasi OTP
-        return redirect()->route('otp.verify')
-            ->with('otp_message', $result['message'])
-            ->with('debug_otp', $result['debug_otp'] ?? null);
+        return redirect()->route('login')
+            ->with('success', 'Akun berhasil dibuat! Silakan hubungi Admin untuk aktivasi akun Anda.');
     }
 }

@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
                 'phone' => '081234567891',
                 'password' => 'password',
                 'role' => 'user',
-                'phone_verified' => true,
+                'is_active' => true,
             ]
         );
     }

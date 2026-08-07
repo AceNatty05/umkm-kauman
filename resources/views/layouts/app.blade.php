@@ -76,11 +76,6 @@
                                 </form>
                             </div>
                         </div>
-                    @else
-                        <a href="{{ route('login') }}"
-                           class="px-4 py-2 text-sm font-medium text-white bg-kauman-primary-dark rounded-lg hover:bg-olive-900 transition-colors border border-green-400/30">
-                            Login / Daftar
-                        </a>
                     @endauth
 
                     <!-- Mobile menu button -->
