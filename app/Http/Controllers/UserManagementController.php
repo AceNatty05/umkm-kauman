@@ -61,7 +61,7 @@ class UserManagementController extends Controller
             'email' => $validated['email'] ?? null,
             'password' => $validated['password'],
             'role' => $validated['role'],
-            'phone_verified' => true, // Admin-created accounts are pre-verified
+            'is_active' => $request->boolean('is_active'),
         ]);
 
         return redirect()->route('users.index')
@@ -94,6 +94,7 @@ class UserManagementController extends Controller
             'phone' => $validated['phone'],
             'email' => $validated['email'] ?? null,
             'role' => $validated['role'],
+            'is_active' => $request->boolean('is_active'),
         ];
 
         if (!empty($validated['password'])) {
@@ -119,5 +120,22 @@ class UserManagementController extends Controller
 
         return redirect()->route('users.index')
             ->with('success', 'User berhasil dihapus.');
+    }
+
+    /**
+     * Toggle status aktif user.
+     */
+    public function toggleActive(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return back()->withErrors(['error' => 'Tidak bisa menonaktifkan akun sendiri.']);
+        }
+
+        $user->update([
+            'is_active' => !$user->is_active,
+        ]);
+
+        $status = $user->is_active ? 'diaktifkan' : 'dinonaktifkan';
+        return back()->with('success', "Akun user {$user->name} berhasil {$status}.");
     }
 }

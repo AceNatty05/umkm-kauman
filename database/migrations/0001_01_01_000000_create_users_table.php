@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('photo')->nullable(); // Cloudinary URL
             $table->enum('role', ['admin', 'user'])->default('user');
-            $table->boolean('phone_verified')->default(false);
+            $table->boolean('is_active')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

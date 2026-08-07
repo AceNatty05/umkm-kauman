@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
                 'phone' => '081234567890',
                 'password' => 'password',
                 'role' => 'admin',
-                'phone_verified' => true,
+                'is_active' => true,
             ]
         );
     }
