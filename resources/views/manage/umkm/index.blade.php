@@ -9,11 +9,59 @@
             </a>
         </div>
 
+        <!-- AJAX Wrapper for Search & Results -->
+        <div id="katalog" x-data="{
+            loading: false,
+            init() {
+                this.$el.addEventListener('click', (e) => {
+                    const link = e.target.closest('a');
+                    if (link && link.href && (link.classList.contains('ajax-link') || link.closest('nav[role=\'navigation\']'))) {
+                        e.preventDefault();
+                        this.fetchContent(link.href);
+                    }
+                });
+                this.$el.addEventListener('submit', (e) => {
+                    const form = e.target.closest('form');
+                    if (form && !form.closest('.exclude-ajax')) {
+                        e.preventDefault();
+                        const formData = new FormData(form);
+                        const url = new URL(form.action);
+                        const params = new URLSearchParams(formData);
+                        // don't include _method or _token in GET URL
+                        formData.forEach((value, key) => {
+                            if (key !== '_token' && key !== '_method') {
+                                url.searchParams.set(key, value);
+                            }
+                        });
+                        this.fetchContent(url.toString());
+                    }
+                });
+            },
+            async fetchContent(url) {
+                this.loading = true;
+                try {
+                    const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newKatalog = doc.getElementById('katalog');
+                    if (newKatalog) {
+                        this.$el.innerHTML = newKatalog.innerHTML;
+                        window.history.pushState({}, '', url);
+                    } else {
+                        window.location.href = url;
+                    }
+                } catch (e) {
+                    window.location.href = url;
+                }
+                this.loading = false;
+            }
+        }" :class="loading ? 'opacity-60 pointer-events-none transition-opacity duration-300' : 'opacity-100 transition-opacity duration-300'">
         <!-- Search & Tabs -->
-        <form method="GET" action="{{ route('umkm.index') }}#katalog" class="flex flex-col sm:flex-row gap-3 mb-6" id="katalog">
+        <form method="GET" action="{{ route('umkm.index') }}#katalog" class="flex flex-col sm:flex-row gap-3 mb-6">
             <div class="flex rounded-lg overflow-hidden border border-kauman-card-border shrink-0">
-                <a href="{{ route('umkm.index', ['tab' => 'produk', 'search' => $search]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
-                <a href="{{ route('umkm.index', ['tab' => 'umkm', 'search' => $search]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
+                <a href="{{ route('umkm.index', ['tab' => 'produk', 'search' => $search]) }}#katalog" class="ajax-link px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
+                <a href="{{ route('umkm.index', ['tab' => 'umkm', 'search' => $search]) }}#katalog" class="ajax-link px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
             </div>
             <div class="flex-1 flex gap-2">
                 <input type="hidden" name="tab" value="{{ $tab }}">
@@ -34,10 +82,10 @@
                     @if($product->formatted_price)<p class="text-kauman-primary font-bold text-sm mb-3">{{ $product->formatted_price }}</p>@endif
                     <div class="flex gap-1.5 flex-wrap">
                         <a href="{{ route('products.edit', [$product->umkm, $product]) }}" class="text-xs font-medium bg-green-500 text-white rounded px-2.5 py-1.5 hover:bg-green-600 transition-colors">Edit</a>
-                        <form method="POST" action="{{ route('products.toggle-star', [$product->umkm, $product]) }}">@csrf @method('PATCH')
+                        <form method="POST" action="{{ route('products.toggle-star', [$product->umkm, $product]) }}" class="exclude-ajax">@csrf @method('PATCH')
                             <button type="submit" class="text-xs font-medium {{ $product->is_starred ? 'bg-gray-600 hover:bg-gray-700' : 'bg-yellow-500 hover:bg-yellow-600' }} text-white rounded px-2.5 py-1.5 transition-colors">{{ $product->is_starred ? 'Hentikan' : 'Unggulkan' }}</button>
                         </form>
-                        <form method="POST" action="{{ route('products.destroy', [$product->umkm, $product]) }}" onsubmit="return confirm('Hapus produk ini?')">@csrf @method('DELETE')
+                        <form method="POST" action="{{ route('products.destroy', [$product->umkm, $product]) }}" onsubmit="return confirm('Hapus produk ini?')" class="exclude-ajax">@csrf @method('DELETE')
                             <button type="submit" class="text-xs font-medium bg-red-500 text-white rounded px-2.5 py-1.5 hover:bg-red-600 transition-colors">Hapus</button>
                         </form>
                     </div>
@@ -63,7 +111,7 @@
                     @endif
                     <div class="flex gap-1.5 flex-wrap">
                         <a href="{{ route('umkm.edit', $umkm) }}" class="text-xs font-medium bg-green-500 text-white rounded px-2.5 py-1.5 hover:bg-green-600 transition-colors">Edit</a>
-                        <form method="POST" action="{{ route('umkm.destroy', $umkm) }}" onsubmit="return confirm('Hapus UMKM ini?')">@csrf @method('DELETE')
+                        <form method="POST" action="{{ route('umkm.destroy', $umkm) }}" onsubmit="return confirm('Hapus UMKM ini?')" class="exclude-ajax">@csrf @method('DELETE')
                             <button type="submit" class="text-xs font-medium bg-red-500 text-white rounded px-2.5 py-1.5 hover:bg-red-600 transition-colors">Hapus</button>
                         </form>
                     </div>
@@ -75,5 +123,6 @@
         @else
         <div class="text-center py-16"><p class="text-gray-500 text-lg">Belum ada data.</p></div>
         @endif
+        </div>
     </div>
 </x-app-layout>

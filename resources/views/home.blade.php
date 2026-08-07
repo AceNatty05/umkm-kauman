@@ -24,14 +24,64 @@
         </section>
         @endif
 
-        <!-- Search & Tabs -->
-        <section class="mb-8" id="katalog">
+        <!-- AJAX Wrapper for Search & Results -->
+        <div id="katalog" x-data="{
+            loading: false,
+            init() {
+                this.$el.addEventListener('click', (e) => {
+                    const link = e.target.closest('a');
+                    if (link && link.href && (link.classList.contains('ajax-link') || link.closest('nav[role=\'navigation\']'))) {
+                        e.preventDefault();
+                        this.fetchContent(link.href);
+                    }
+                });
+                this.$el.addEventListener('submit', (e) => {
+                    const form = e.target.closest('form');
+                    if (form) {
+                        e.preventDefault();
+                        const formData = new FormData(form);
+                        const url = new URL(form.action);
+                        const params = new URLSearchParams(formData);
+                        url.search = params.toString();
+                        this.fetchContent(url.toString());
+                    }
+                });
+                this.$el.addEventListener('change', (e) => {
+                    const select = e.target.closest('select[name=\'category\']');
+                    if (select) {
+                        e.preventDefault();
+                        select.closest('form').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+                    }
+                });
+            },
+            async fetchContent(url) {
+                this.loading = true;
+                try {
+                    const response = await fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+                    const html = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newKatalog = doc.getElementById('katalog');
+                    if (newKatalog) {
+                        this.$el.innerHTML = newKatalog.innerHTML;
+                        window.history.pushState({}, '', url);
+                    } else {
+                        window.location.href = url;
+                    }
+                } catch (e) {
+                    window.location.href = url;
+                }
+                this.loading = false;
+            }
+        }" :class="loading ? 'opacity-60 pointer-events-none transition-opacity duration-300' : 'opacity-100 transition-opacity duration-300'">
+            <!-- Search & Tabs -->
+            <section class="mb-8">
             <form method="GET" action="{{ route('home') }}#katalog" class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
                 <div class="flex rounded-lg overflow-hidden border border-kauman-card-border shrink-0">
-                    <a href="{{ route('home', ['tab' => 'produk', 'search' => $search, 'category' => $categoryId]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
-                    <a href="{{ route('home', ['tab' => 'umkm', 'search' => $search, 'category' => $categoryId]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
+                    <a href="{{ route('home', ['tab' => 'produk', 'search' => $search, 'category' => $categoryId]) }}#katalog" class="ajax-link px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
+                    <a href="{{ route('home', ['tab' => 'umkm', 'search' => $search, 'category' => $categoryId]) }}#katalog" class="ajax-link px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
                 </div>
-                <select name="category" onchange="this.form.submit()" class="rounded-lg border-kauman-card-border text-sm focus:ring-kauman-primary focus:border-kauman-primary">
+                <select name="category" class="rounded-lg border-kauman-card-border text-sm focus:ring-kauman-primary focus:border-kauman-primary">
                     <option value="">Semua Kategori</option>
                     @foreach($categories as $cat)
                     <option value="{{ $cat->id }}" {{ $categoryId == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
@@ -70,5 +120,6 @@
             </div>
             @endif
         </section>
+        </div>
     </div>
 </x-app-layout>
