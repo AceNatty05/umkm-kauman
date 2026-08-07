@@ -34,6 +34,10 @@
                            class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('home') ? 'bg-kauman-primary-dark text-white' : 'text-green-100 hover:bg-kauman-primary-dark hover:text-white' }} transition-colors">
                             Beranda
                         </a>
+                        <a href="{{ route('public.infografis.index') }}"
+                           class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('public.infografis.*') ? 'bg-kauman-primary-dark text-white' : 'text-green-100 hover:bg-kauman-primary-dark hover:text-white' }} transition-colors">
+                            Infografis
+                        </a>
 
                         @auth
                             <a href="{{ route('umkm.index') }}"
@@ -45,6 +49,10 @@
                                 <a href="{{ route('users.index') }}"
                                    class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('users.*') ? 'bg-kauman-primary-dark text-white' : 'text-green-100 hover:bg-kauman-primary-dark hover:text-white' }} transition-colors">
                                     Manajemen User
+                                </a>
+                                <a href="{{ route('manage.infografis.index') }}"
+                                   class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('manage.infografis.*') ? 'bg-kauman-primary-dark text-white' : 'text-green-100 hover:bg-kauman-primary-dark hover:text-white' }} transition-colors">
+                                    Manajemen Infografis
                                 </a>
                             @endif
                         @endauth
@@ -89,10 +97,12 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-kauman-primary-dark pb-3">
             <a href="{{ route('home') }}" class="block px-4 py-2 text-green-100 hover:text-white text-sm">Beranda</a>
+            <a href="{{ route('public.infografis.index') }}" class="block px-4 py-2 text-green-100 hover:text-white text-sm">Infografis</a>
             @auth
                 <a href="{{ route('umkm.index') }}" class="block px-4 py-2 text-green-100 hover:text-white text-sm">Manajemen UMKM</a>
                 @if(auth()->user()->isAdmin())
                     <a href="{{ route('users.index') }}" class="block px-4 py-2 text-green-100 hover:text-white text-sm">Manajemen User</a>
+                    <a href="{{ route('manage.infografis.index') }}" class="block px-4 py-2 text-green-100 hover:text-white text-sm">Manajemen Infografis</a>
                 @endif
             @endauth
         </div>
