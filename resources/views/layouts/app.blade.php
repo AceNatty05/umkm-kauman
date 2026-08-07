@@ -15,7 +15,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased bg-kauman-body text-gray-800">
+<body class="font-sans antialiased bg-kauman-body text-gray-800 flex flex-col min-h-screen">
     <!-- Navbar -->
     <nav class="bg-kauman-primary shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -124,7 +124,7 @@
     @endif
 
     <!-- Page Content -->
-    <main>
+    <main class="flex-grow">
         {{ $slot }}
     </main>
 
@@ -134,7 +134,7 @@
             <div class="text-center">
                 <p class="text-lg font-bold text-white mb-2">UMKM Desa Kauman</p>
                 <p class="text-sm text-green-200">Portal UMKM untuk mendukung pertumbuhan usaha mikro, kecil, dan menengah di Desa Kauman.</p>
-                <p class="text-xs text-green-300 mt-4">&copy; {{ date('Y') }} UMKM Desa Kauman. All rights reserved.</p>
+                <p class="text-xs text-green-300 mt-4">&copy; KKN UNDIP TIM II 2026 Desa Kauman. All rights reserved.</p>
             </div>
         </div>
     </footer>
