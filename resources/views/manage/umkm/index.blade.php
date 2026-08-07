@@ -10,10 +10,10 @@
         </div>
 
         <!-- Search & Tabs -->
-        <form method="GET" action="{{ route('umkm.index') }}" class="flex flex-col sm:flex-row gap-3 mb-6">
+        <form method="GET" action="{{ route('umkm.index') }}#katalog" class="flex flex-col sm:flex-row gap-3 mb-6" id="katalog">
             <div class="flex rounded-lg overflow-hidden border border-kauman-card-border shrink-0">
-                <a href="{{ route('umkm.index', ['tab' => 'produk', 'search' => $search]) }}" class="px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
-                <a href="{{ route('umkm.index', ['tab' => 'umkm', 'search' => $search]) }}" class="px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
+                <a href="{{ route('umkm.index', ['tab' => 'produk', 'search' => $search]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
+                <a href="{{ route('umkm.index', ['tab' => 'umkm', 'search' => $search]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
             </div>
             <div class="flex-1 flex gap-2">
                 <input type="hidden" name="tab" value="{{ $tab }}">

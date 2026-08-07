@@ -28,14 +28,16 @@ class UmkmController extends Controller
                 ->search($search)
                 ->latest()
                 ->paginate(12)
-                ->appends($request->query());
+                ->appends($request->query())
+                ->fragment('katalog');
         } else {
             $umkms = $user->umkms()
                 ->with(['category', 'products'])
                 ->search($search)
                 ->latest()
                 ->paginate(12)
-                ->appends($request->query());
+                ->appends($request->query())
+                ->fragment('katalog');
         }
 
         // Jika tab produk, ambil produk
@@ -48,7 +50,7 @@ class UmkmController extends Controller
             if ($search) {
                 $productQuery->search($search);
             }
-            $products = $productQuery->latest()->paginate(12)->appends($request->query());
+            $products = $productQuery->latest()->paginate(12)->appends($request->query())->fragment('katalog');
         }
 
         $categories = Category::orderBy('name')->get();

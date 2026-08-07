@@ -25,11 +25,11 @@
         @endif
 
         <!-- Search & Tabs -->
-        <section class="mb-8">
-            <form method="GET" action="{{ route('home') }}" class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+        <section class="mb-8" id="katalog">
+            <form method="GET" action="{{ route('home') }}#katalog" class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
                 <div class="flex rounded-lg overflow-hidden border border-kauman-card-border shrink-0">
-                    <a href="{{ route('home', ['tab' => 'produk', 'search' => $search, 'category' => $categoryId]) }}" class="px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
-                    <a href="{{ route('home', ['tab' => 'umkm', 'search' => $search, 'category' => $categoryId]) }}" class="px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
+                    <a href="{{ route('home', ['tab' => 'produk', 'search' => $search, 'category' => $categoryId]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
+                    <a href="{{ route('home', ['tab' => 'umkm', 'search' => $search, 'category' => $categoryId]) }}#katalog" class="px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
                 </div>
                 <select name="category" onchange="this.form.submit()" class="rounded-lg border-kauman-card-border text-sm focus:ring-kauman-primary focus:border-kauman-primary">
                     <option value="">Semua Kategori</option>

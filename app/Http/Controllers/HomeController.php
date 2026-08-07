@@ -31,14 +31,16 @@ class HomeController extends Controller
                 ->byCategory($categoryId)
                 ->latest()
                 ->paginate(12)
-                ->appends($request->query());
+                ->appends($request->query())
+                ->fragment('katalog');
         } else {
             $items = Product::with(['umkm', 'category'])
                 ->search($search)
                 ->when($categoryId, fn($q) => $q->where('category_id', $categoryId))
                 ->latest()
                 ->paginate(12)
-                ->appends($request->query());
+                ->appends($request->query())
+                ->fragment('katalog');
         }
 
         $categories = Category::orderBy('name')->get();
