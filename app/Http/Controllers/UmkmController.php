@@ -81,6 +81,12 @@ class UmkmController extends Controller
             'category_id' => 'nullable|exists:categories,id',
             'new_category' => 'nullable|string|max:255',
             'gallery.*' => 'nullable|image|max:2048',
+            'products' => 'nullable|array',
+            'products.*.name' => 'required_with:products|string|max:255',
+            'products.*.photo' => 'required_with:products|image|max:2048',
+            'products.*.price' => 'nullable|numeric|min:0',
+            'products.*.price_unit' => 'nullable|string|max:50',
+            'products.*.description' => 'required_with:products|string',
         ], [
             'name.required' => 'Nama UMKM wajib diisi.',
             'photo.required' => 'Foto UMKM wajib diupload.',
@@ -88,6 +94,9 @@ class UmkmController extends Controller
             'photo.max' => 'Ukuran foto maksimal 2MB.',
             'owner_name.required' => 'Nama pemilik wajib diisi.',
             'description.required' => 'Deskripsi wajib diisi.',
+            'products.*.name.required_with' => 'Nama produk wajib diisi.',
+            'products.*.photo.required_with' => 'Foto produk wajib diupload.',
+            'products.*.description.required_with' => 'Deskripsi produk wajib diisi.',
         ]);
 
         // Handle kategori baru
@@ -126,6 +135,28 @@ class UmkmController extends Controller
                         'photo_path' => $url,
                         'sort_order' => $index,
                     ]);
+                }
+            }
+        }
+
+        // Simpan produk dinamis
+        if (!empty($validated['products'])) {
+            foreach ($validated['products'] as $index => $productData) {
+                $productPhoto = $request->file("products.{$index}.photo");
+                if ($productPhoto) {
+                    $productPhotoUrl = $productPhoto->store('products', 'public');
+                    if ($productPhotoUrl) {
+                        $umkm->products()->create([
+                            'category_id' => $umkm->category_id,
+                            'name' => $productData['name'],
+                            'slug' => Str::slug($productData['name']),
+                            'photo' => $productPhotoUrl,
+                            'price' => $productData['price'] ?? null,
+                            'price_unit' => $productData['price_unit'] ?? null,
+                            'description' => $productData['description'],
+                            'is_starred' => false,
+                        ]);
+                    }
                 }
             }
         }

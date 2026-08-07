@@ -21,30 +21,19 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
-        // Tab: produk atau umkm
-        $tab = $request->get('tab', 'produk');
         $search = $request->get('search');
         $categoryId = $request->get('category');
 
-        if ($tab === 'umkm') {
-            $items = Umkm::with(['category', 'products'])
-                ->search($search)
-                ->byCategory($categoryId)
-                ->latest()
-                ->paginate(12)
-                ->appends($request->query());
-        } else {
-            $items = Product::with(['umkm', 'category'])
-                ->search($search)
-                ->when($categoryId, fn($q) => $q->where('category_id', $categoryId))
-                ->latest()
-                ->paginate(12)
-                ->appends($request->query());
-        }
+        $items = Umkm::with(['category', 'products', 'photos'])
+            ->search($search)
+            ->byCategory($categoryId)
+            ->latest()
+            ->paginate(12)
+            ->appends($request->query());
 
         $categories = Category::orderBy('name')->get();
 
-        return view('home', compact('starredProducts', 'items', 'tab', 'search', 'categories', 'categoryId'));
+        return view('home', compact('starredProducts', 'items', 'search', 'categories', 'categoryId'));
     }
 
     /**
