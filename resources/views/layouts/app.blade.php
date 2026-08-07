@@ -138,7 +138,7 @@
 
                 <div class="flex justify-center items-center gap-6 mt-6">
                     <img src="{{ asset('images/logo_kkn.png') }}" alt="Logo 1" class="h-20 w-auto rounded-full">
-                    <img src="{{ asset('images/logo_undip_dikti.png') }}" alt="Logo 2" class="h-20 w-auto">
+                    <img src="{{ asset('images/logo_undip_dikti.png') }}" alt="Logo 2" class="h-24 w-auto">
                 </div>
             </div>
         </div>
