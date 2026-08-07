@@ -23,7 +23,7 @@
                 <!-- Left: Logo & Nav Links -->
                 <div class="flex items-center space-x-8">
                     <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <img src="{{ asset('favicon.ico') }}" alt="Logo" class="w-8 h-8 rounded-full object-cover">
+                        <img src="{{ asset('favicon.ico') }}" alt="Logo" class="w-12 h-12 rounded-full object-cover">
                         <span class="text-white font-bold text-lg hidden sm:block">UMKM Kauman</span>
                     </a>
 
