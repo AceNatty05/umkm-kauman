@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 // Halaman Publik
 // ================================
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/umkm/{slug}', [HomeController::class, 'showUmkm'])->name('umkm.show');
+Route::get('/umkm/{slug}', [HomeController::class, 'showUmkm'])->name('public.umkm.show');
 
 // ================================
 // Authenticated Routes

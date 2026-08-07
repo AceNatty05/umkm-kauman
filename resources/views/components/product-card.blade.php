@@ -1,6 +1,6 @@
 @php $isStarred = $starred ?? false; @endphp
 <div class="{{ $isStarred ? 'min-w-[260px] max-w-[280px] snap-start flex-shrink-0' : '' }} bg-kauman-card rounded-xl border border-kauman-card-border shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-    <a href="{{ route('umkm.show', $product->umkm->slug) }}">
+    <a href="{{ route('public.umkm.show', $product->umkm->slug) }}">
         <img src="{{ $product->photo }}" alt="{{ $product->name }}" class="w-full h-44 object-cover rounded-t-xl">
     </a>
     <div class="p-4">

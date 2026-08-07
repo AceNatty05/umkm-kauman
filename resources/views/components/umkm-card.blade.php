@@ -1,5 +1,5 @@
 <div class="bg-kauman-card rounded-xl border border-kauman-card-border shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-    <a href="{{ route('umkm.show', $umkm->slug) }}">
+    <a href="{{ route('public.umkm.show', $umkm->slug) }}">
         <img src="{{ $umkm->photo }}" alt="{{ $umkm->name }}" class="w-full h-48 object-cover rounded-t-xl">
     </a>
     <div class="p-4">
