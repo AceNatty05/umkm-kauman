@@ -27,7 +27,10 @@
         <!-- Search & Tabs -->
         <section class="mb-8">
             <form method="GET" action="{{ route('home') }}" class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-
+                <div class="flex rounded-lg overflow-hidden border border-kauman-card-border shrink-0">
+                    <a href="{{ route('home', ['tab' => 'produk', 'search' => $search, 'category' => $categoryId]) }}" class="px-4 py-2 text-sm font-medium {{ $tab === 'produk' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">Produk</a>
+                    <a href="{{ route('home', ['tab' => 'umkm', 'search' => $search, 'category' => $categoryId]) }}" class="px-4 py-2 text-sm font-medium {{ $tab === 'umkm' ? 'bg-kauman-primary text-white' : 'bg-white text-gray-700 hover:bg-olive-50' }} transition-colors">UMKM</a>
+                </div>
                 <select name="category" onchange="this.form.submit()" class="rounded-lg border-kauman-card-border text-sm focus:ring-kauman-primary focus:border-kauman-primary">
                     <option value="">Semua Kategori</option>
                     @foreach($categories as $cat)
@@ -35,7 +38,8 @@
                     @endforeach
                 </select>
                 <div class="flex-1 flex gap-2">
-                    <input type="text" name="search" value="{{ $search }}" placeholder="Cari UMKM..." class="flex-1 rounded-lg border-kauman-card-border text-sm focus:ring-kauman-primary focus:border-kauman-primary placeholder-gray-400">
+                    <input type="hidden" name="tab" value="{{ $tab }}">
+                    <input type="text" name="search" value="{{ $search }}" placeholder="Cari {{ $tab === 'umkm' ? 'UMKM' : 'produk' }}..." class="flex-1 rounded-lg border-kauman-card-border text-sm focus:ring-kauman-primary focus:border-kauman-primary placeholder-gray-400">
                     <button type="submit" class="bg-kauman-primary text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-kauman-primary-dark transition-colors flex items-center gap-1 shrink-0">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                         Cari
@@ -47,16 +51,22 @@
         <!-- Results -->
         <section>
             @if($items->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                @foreach($items as $umkm)
-                @include('components.umkm-card', ['umkm' => $umkm])
-                @endforeach
+            <div class="grid {{ $tab === 'produk' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3' }} gap-5">
+                @if($tab === 'produk')
+                    @foreach($items as $product)
+                    @include('components.product-card', ['product' => $product])
+                    @endforeach
+                @else
+                    @foreach($items as $umkm)
+                    @include('components.umkm-card', ['umkm' => $umkm])
+                    @endforeach
+                @endif
             </div>
             <div class="mt-8">{{ $items->links() }}</div>
             @else
             <div class="text-center py-16">
                 <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
-                <p class="text-gray-500 text-lg">Belum ada UMKM yang terdaftar.</p>
+                <p class="text-gray-500 text-lg">Belum ada {{ $tab === 'umkm' ? 'UMKM' : 'produk' }} yang terdaftar.</p>
             </div>
             @endif
         </section>

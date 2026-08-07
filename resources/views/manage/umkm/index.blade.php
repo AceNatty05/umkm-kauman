@@ -35,7 +35,7 @@
                     <div class="flex gap-1.5 flex-wrap">
                         <a href="{{ route('products.edit', [$product->umkm, $product]) }}" class="text-xs font-medium bg-green-500 text-white rounded px-2.5 py-1.5 hover:bg-green-600 transition-colors">Edit</a>
                         <form method="POST" action="{{ route('products.toggle-star', [$product->umkm, $product]) }}">@csrf @method('PATCH')
-                            <button type="submit" class="text-xs font-medium {{ $product->is_starred ? 'bg-yellow-500' : 'bg-yellow-400' }} text-white rounded px-2.5 py-1.5 hover:bg-yellow-600 transition-colors">{{ $product->is_starred ? '★ Unggulan' : 'Iklankan' }}</button>
+                            <button type="submit" class="text-xs font-medium {{ $product->is_starred ? 'bg-gray-600 hover:bg-gray-700' : 'bg-yellow-500 hover:bg-yellow-600' }} text-white rounded px-2.5 py-1.5 transition-colors">{{ $product->is_starred ? 'Hentikan' : 'Unggulkan' }}</button>
                         </form>
                         <form method="POST" action="{{ route('products.destroy', [$product->umkm, $product]) }}" onsubmit="return confirm('Hapus produk ini?')">@csrf @method('DELETE')
                             <button type="submit" class="text-xs font-medium bg-red-500 text-white rounded px-2.5 py-1.5 hover:bg-red-600 transition-colors">Hapus</button>

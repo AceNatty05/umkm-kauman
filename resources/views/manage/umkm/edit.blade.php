@@ -96,7 +96,7 @@
                     <div class="flex gap-1 mt-2">
                         <a href="{{ route('products.edit', [$umkm, $product]) }}" class="text-xs bg-green-500 text-white rounded px-2 py-1 hover:bg-green-600">Edit</a>
                         <form method="POST" action="{{ route('products.toggle-star', [$umkm, $product]) }}">@csrf @method('PATCH')
-                            <button class="text-xs {{ $product->is_starred ? 'bg-yellow-500' : 'bg-yellow-400' }} text-white rounded px-2 py-1 hover:bg-yellow-600">{{ $product->is_starred ? '★' : '☆' }}</button>
+                            <button class="text-xs {{ $product->is_starred ? 'bg-gray-600 hover:bg-gray-700' : 'bg-yellow-500 hover:bg-yellow-600' }} text-white rounded px-2 py-1 transition-colors">{{ $product->is_starred ? 'Hentikan' : 'Unggulkan' }}</button>
                         </form>
                         <form method="POST" action="{{ route('products.destroy', [$umkm, $product]) }}" onsubmit="return confirm('Hapus?')">@csrf @method('DELETE')
                             <button class="text-xs bg-red-500 text-white rounded px-2 py-1 hover:bg-red-600">Hapus</button>
