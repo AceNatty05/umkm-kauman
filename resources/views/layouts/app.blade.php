@@ -42,7 +42,6 @@
                                class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('umkm.*') && !request()->routeIs('umkm.show') ? 'bg-kauman-primary-dark text-white' : 'text-green-100 hover:bg-kauman-primary-dark hover:text-white' }} transition-colors">
                                 Manajemen UMKM
                             </a>
-
                             @if(auth()->user()->isAdmin())
                                 <a href="{{ route('users.index') }}"
                                    class="px-3 py-2 rounded-md text-sm font-medium {{ request()->routeIs('users.*') ? 'bg-kauman-primary-dark text-white' : 'text-green-100 hover:bg-kauman-primary-dark hover:text-white' }} transition-colors">
@@ -60,10 +59,12 @@
                 <!-- Right: Auth -->
                 <div class="flex items-center space-x-3">
                     @auth
+                        @if(auth()->user()->isAdmin())
                         <a href="{{ route('dashboard') }}"
                            class="text-green-100 hover:text-white text-sm hidden sm:block transition-colors">
                             Dashboard
                         </a>
+                        @endif
                         <div class="relative" x-data="{ open: false }">
                             <button @click="open = !open" class="flex items-center space-x-2 text-green-100 hover:text-white transition-colors">
                                 <img src="{{ auth()->user()->photo_url }}" alt="Profile" class="w-8 h-8 rounded-full border-2 border-green-300 object-cover">
@@ -74,7 +75,9 @@
                             <div x-show="open" @click.away="open = false" x-transition
                                  class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-1 z-50">
                                 <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-olive-50">Profil Saya</a>
+                                @if(auth()->user()->isAdmin())
                                 <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-olive-50">Dashboard</a>
+                                @endif
                                 <hr class="my-1">
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

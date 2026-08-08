@@ -22,9 +22,6 @@ Route::get('/infografis', [InfografisController::class, 'index'])->name('public.
 // Authenticated Routes
 // ================================
 Route::middleware('auth')->group(function () {
-    // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -56,6 +53,9 @@ Route::middleware('auth')->group(function () {
     // Admin Only
     // ================================
     Route::middleware('role:admin')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        
         Route::patch('manage/users/{user}/toggle-active', [UserManagementController::class, 'toggleActive'])->name('users.toggle-active');
         Route::resource('manage/users', UserManagementController::class)->names('users');
         Route::resource('manage/infografis', InfografisManagementController::class)->names('manage.infografis');

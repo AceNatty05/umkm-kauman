@@ -24,6 +24,11 @@ class EnsureUserHasRole
             }
         }
 
+        // Special handling for dashboard redirect (if a user is redirected here by auth middleware but isn't admin)
+        if ($request->routeIs('dashboard')) {
+            return redirect()->route('umkm.index');
+        }
+
         abort(403, 'Anda tidak memiliki akses ke halaman ini.');
     }
 }

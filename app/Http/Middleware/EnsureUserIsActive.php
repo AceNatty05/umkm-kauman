@@ -16,11 +16,13 @@ class EnsureUserIsActive
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->user() && !$request->user()->is_active) {
-            // Check if they are already on dashboard to prevent redirect loop
-            if ($request->routeIs('dashboard')) {
-                return $next($request);
-            }
-            return redirect()->route('dashboard')->with('error', 'Akun Anda sedang menunggu persetujuan admin. Anda belum dapat mengelola UMKM.');
+            auth()->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login')->withErrors([
+                'phone' => 'Akun Anda telah dinonaktifkan atau menunggu persetujuan admin.',
+            ]);
         }
 
         return $next($request);
