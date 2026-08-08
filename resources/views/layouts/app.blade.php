@@ -142,11 +142,10 @@
                 <!-- <p class="text-sm text-green-200">Portal UMKM untuk mendukung pertumbuhan usaha mikro, kecil, dan menengah di Desa Kauman.</p> -->
                 <p class="text-xs text-green-300 mt-4">&copy; KKN UNDIP TIM II 2026 Desa Kauman. All rights reserved.</p>
 
-                <div class="flex justify-center items-center gap-6 mt-6">
-                    <img src="{{ asset('images/logo_kkn.png') }}" alt="Logo 1" class="h-20 w-auto rounded-full">
-                    <!-- <img src="{{ asset('images/logo_undip.png') }}" alt="Logo 1" class="h-20 w-auto"> -->
-                    <img src="{{ asset('images/logo_undip_horizontal.png') }}" alt="Logo 2" class="h-32 w-auto">
-                    <img src="{{ asset('images/logo_dikti_horizontal.png') }}" alt="Logo 2" class="h-32 w-auto">
+                <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 mt-6">
+                    <img src="{{ asset('images/logo_kkn.png') }}" alt="Logo KKN" class="h-12 md:h-16 lg:h-20 w-auto rounded-full">
+                    <img src="{{ asset('images/logo_undip_horizontal.png') }}" alt="Logo Undip" class="h-16 md:h-24 lg:h-32 w-auto">
+                    <img src="{{ asset('images/logo_dikti_horizontal.png') }}" alt="Logo Dikti" class="h-16 md:h-24 lg:h-32 w-auto">
                 </div>
             </div>
         </div>
