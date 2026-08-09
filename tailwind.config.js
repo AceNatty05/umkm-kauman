@@ -37,7 +37,32 @@ export default {
                     'card-border': '#A8C686',
                     body: '#F5F5F0',
                     whatsapp: '#25D366',
+                    accent: '#C8A951',
+                    'accent-warm': '#D4956A',
                 },
+            },
+            animation: {
+                'fade-up': 'fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                'slide-in-right': 'slideInRight 0.4s ease-out forwards',
+                'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+            },
+            keyframes: {
+                fadeUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                slideInRight: {
+                    '0%': { opacity: '0', transform: 'translateX(20px)' },
+                    '100%': { opacity: '1', transform: 'translateX(0)' },
+                },
+                pulseSoft: {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0.7' },
+                },
+            },
+            boxShadow: {
+                'glow-olive': '0 8px 30px -6px rgba(85, 107, 47, 0.25)',
+                'glow-lg': '0 20px 50px -12px rgba(85, 107, 47, 0.3)',
             },
         },
     },
