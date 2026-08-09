@@ -275,7 +275,7 @@
                 </div>
 
                 <!-- Copyright -->
-                <p class="text-center text-xs text-green-300/50">&copy; {{ date('Y') }} KKN UNDIP TIM II — Desa Kauman, Kec. Wiradesa, Kab. Pekalongan. All rights reserved.</p>
+                <p class="text-center text-xs text-green-300/50">&copy; {{ date('Y') }} KKN UNDIP TIM II — Desa Kauman, Kec. Comal, Kab. Pemalang. All rights reserved.</p>
             </div>
         </div>
     </footer>
