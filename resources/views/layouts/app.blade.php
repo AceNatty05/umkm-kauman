@@ -178,16 +178,104 @@
         <!-- Decorative top edge -->
         <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-kauman-primary-light via-kauman-accent to-kauman-primary-light opacity-60"></div>
 
-        <div class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center">
-                <p class="text-xl font-bold text-white mb-1 tracking-tight">UMKM Desa Kauman</p>
-                <p class="text-xs text-green-300/80 mt-3">&copy; KKN UNDIP TIM II 2026 Desa Kauman. All rights reserved.</p>
+        <div class="max-w-7xl mx-auto px-4 pt-12 pb-8 sm:px-6 lg:px-8 relative z-10">
+            <!-- Main Footer Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 mb-10">
 
-                <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 mt-6">
-                    <img src="{{ asset('images/logo_kkn.png') }}" alt="Logo KKN" class="h-12 md:h-16 lg:h-20 w-auto rounded-full opacity-90 hover:opacity-100 transition-opacity duration-300">
-                    <img src="{{ asset('images/logo_undip_horizontal.png') }}" alt="Logo Undip" class="h-16 md:h-24 lg:h-32 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
-                    <img src="{{ asset('images/logo_dikti_horizontal.png') }}" alt="Logo Dikti" class="h-16 md:h-24 lg:h-32 w-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
+                <!-- Column 1: About -->
+                <div>
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <img src="{{ asset('favicon.ico') }}" alt="Logo" class="w-9 h-9 rounded-full ring-2 ring-white/20">
+                        <h3 class="text-white font-bold text-lg tracking-tight">UMKM Desa Kauman</h3>
+                    </div>
+                    <p class="text-green-200/70 text-sm leading-relaxed">
+                        Platform digital untuk mengenalkan dan mempromosikan produk UMKM Desa Kauman, Kec. Comal , Kab. Pemalang. Dikembangkan oleh Tim KKN UNDIP 2026.
+                    </p>
                 </div>
+
+                <!-- Column 2: Navigasi -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Navigasi</h3>
+                    <ul class="space-y-2.5">
+                        <li>
+                            <a href="{{ route('home') }}" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2 transition-colors duration-200 group">
+                                <svg class="w-3.5 h-3.5 text-green-300/50 group-hover:text-kauman-primary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                Beranda
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('home', ['tab' => 'produk']) }}#katalog" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2 transition-colors duration-200 group">
+                                <svg class="w-3.5 h-3.5 text-green-300/50 group-hover:text-kauman-primary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                Katalog Produk
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('home', ['tab' => 'umkm']) }}#katalog" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2 transition-colors duration-200 group">
+                                <svg class="w-3.5 h-3.5 text-green-300/50 group-hover:text-kauman-primary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                Daftar UMKM
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('public.infografis.index') }}" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2 transition-colors duration-200 group">
+                                <svg class="w-3.5 h-3.5 text-green-300/50 group-hover:text-kauman-primary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                Infografis
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Kontak -->
+                <div>
+                    <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Hubungi Kami</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="https://instagram.com/umkm.desakauman" target="_blank" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2.5 transition-colors duration-200 group">
+                                <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-white text-xs font-medium">Instagram UMKM</span>
+                                    <span class="text-xs text-green-300/60">@umkm.desakauman</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://instagram.com/pemdeskauman" target="_blank" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2.5 transition-colors duration-200 group">
+                                <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-white text-xs font-medium">Instagram Pemdes</span>
+                                    <span class="text-xs text-green-300/60">@pemdeskauman</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://wa.me/6281234567890" target="_blank" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2.5 transition-colors duration-200 group">
+                                <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-white text-xs font-medium">WhatsApp Admin</span>
+                                    <span class="text-xs text-green-300/60">+62 822-4300-9527</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-white/10 pt-8">
+                <!-- Partner Logos -->
+                <div class="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-6">
+                    <img src="{{ asset('images/logo_kkn.png') }}" alt="Logo KKN" class="h-10 md:h-14 lg:h-16 w-auto rounded-full opacity-80 hover:opacity-100 transition-opacity duration-300">
+                    <img src="{{ asset('images/logo_undip_horizontal.png') }}" alt="Logo Undip" class="h-14 md:h-20 lg:h-24 w-auto opacity-80 hover:opacity-100 transition-opacity duration-300">
+                    <img src="{{ asset('images/logo_dikti_horizontal.png') }}" alt="Logo Dikti" class="h-14 md:h-20 lg:h-24 w-auto opacity-80 hover:opacity-100 transition-opacity duration-300">
+                </div>
+
+                <!-- Copyright -->
+                <p class="text-center text-xs text-green-300/50">&copy; {{ date('Y') }} KKN UNDIP TIM II — Desa Kauman, Kec. Wiradesa, Kab. Pekalongan. All rights reserved.</p>
             </div>
         </div>
     </footer>

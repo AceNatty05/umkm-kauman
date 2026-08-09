@@ -10,19 +10,23 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm text-green-100 mb-6 border border-white/10">
-                <svg class="w-4 h-4 text-kauman-primary-light" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                Portal UMKM Resmi
+                <svg class="w-4 h-4 text-kauman-primary-light" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                Desa Kauman, Kec. Comal, Kab. Pemalang
             </div>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 tracking-tight leading-tight">
-                UMKM Desa <span class="text-kauman-primary-light">Kauman</span>
+                Belanja Langsung dari <span class="text-kauman-primary-light">Pengrajin Lokal</span>
             </h1>
             <p class="text-lg sm:text-xl text-green-100/80 max-w-2xl mx-auto leading-relaxed">
-                Temukan produk dan usaha terbaik dari Desa Kauman. Dukung UMKM lokal!
+                Dari tangan terampil warga Desa Kauman, hadir produk berkualitas yang siap Anda jelajahi. Kenali usahanya, hubungi langsung, dan dukung ekonomi desa!
             </p>
-            <div class="mt-8">
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a href="#katalog" class="inline-flex items-center gap-2 bg-white text-kauman-primary font-semibold px-7 py-3 rounded-full shadow-lg shadow-black/10 hover:shadow-xl hover:bg-olive-50 transition-all duration-300 hover:-translate-y-0.5">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     Jelajahi Produk
+                </a>
+                <a href="{{ route('home', ['tab' => 'umkm']) }}#katalog" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-semibold px-7 py-3 rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-0.5">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    Lihat Daftar UMKM
                 </a>
             </div>
         </div>
@@ -49,7 +53,7 @@
         @endif
 
         <!-- ==================== KATALOG (AJAX) ==================== -->
-        <div id="katalog" x-data="katalog()" x-init="init()" class="reveal-on-scroll">
+        <div id="katalog" x-data="katalog()" x-init="init()" class="reveal-on-scroll" style="scroll-margin-top: 5rem;">
             <!-- Skeleton overlay -->
             <template x-if="loading">
                 <div class="space-y-6 animate-pulse" aria-label="Memuat konten...">
