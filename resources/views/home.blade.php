@@ -20,7 +20,7 @@
                 Dari tangan terampil warga Desa Kauman, hadir produk berkualitas yang siap Anda jelajahi. Kenali usahanya, hubungi langsung, dan dukung ekonomi desa!
             </p>
             <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a href="#katalog" class="inline-flex items-center gap-2 bg-white text-kauman-primary font-semibold px-7 py-3 rounded-full shadow-lg shadow-black/10 hover:shadow-xl hover:bg-olive-50 transition-all duration-300 hover:-translate-y-0.5">
+                <a href="{{ route('home', ['tab' => 'produk']) }}#katalog" class="inline-flex items-center gap-2 bg-white text-kauman-primary font-semibold px-7 py-3 rounded-full shadow-lg shadow-black/10 hover:shadow-xl hover:bg-olive-50 transition-all duration-300 hover:-translate-y-0.5">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                     Jelajahi Produk
                 </a>
