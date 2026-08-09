@@ -7,7 +7,7 @@
         <div class="hero-blob w-48 h-48 bg-olive-400/20 bottom-0 left-1/4" style="animation-delay: 4s;"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Kumpulan Infografis</h1>
-            <p class="mt-3 text-green-100/80 text-lg max-w-xl mx-auto">Kumpulan informasi dan poster terkait pengelolaan UMKM</p>
+            <p class="mt-3 text-green-100/80 text-lg max-w-xl mx-auto">Kumpulan informasi dan poster terkait pengelolaan UMKM. Klik untuk membacanya.</p>
         </div>
     </section>
 
