@@ -138,6 +138,7 @@
              class="md:hidden bg-kauman-primary-dark/95 backdrop-blur-lg pb-4 border-t border-white/10">
             <a href="{{ route('home') }}" class="block px-5 py-2.5 text-green-100 hover:text-white hover:bg-white/10 text-sm transition-colors">Beranda</a>
             <a href="{{ route('public.infografis.index') }}" class="block px-5 py-2.5 text-green-100 hover:text-white hover:bg-white/10 text-sm transition-colors">Infografis</a>
+            <a href="{{ route('public.tutorials.index') }}" class="block px-5 py-2.5 text-green-100 hover:text-white hover:bg-white/10 text-sm transition-colors">Tutorial</a>
             @auth
                 <a href="{{ route('umkm.index') }}" class="block px-5 py-2.5 text-green-100 hover:text-white hover:bg-white/10 text-sm transition-colors">Manajemen UMKM</a>
                 @if(auth()->user()->isAdmin())
