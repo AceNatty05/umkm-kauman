@@ -10,6 +10,9 @@
 
     <!-- Canonical URL untuk SEO -->
     <link rel="canonical" href="{{ url()->current() }}" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
