@@ -16,7 +16,7 @@
         </div>
 
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden p-6 sm:p-8">
-            <form action="{{ route('manage.tutorials.update', $tutorial->id) }}" method="POST">
+            <form action="{{ route('manage.tutorials.update', $tutorial->slug) }}" method="POST">
                 @csrf
                 @method('PUT')
                 
