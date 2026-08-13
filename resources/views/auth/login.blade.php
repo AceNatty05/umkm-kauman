@@ -24,7 +24,7 @@
     
     <div x-data="{ showAdmins: false }" class="mt-4 text-center">
         <button @click="showAdmins = !showAdmins" type="button" class="text-sm text-kauman-primary font-medium hover:underline focus:outline-none transition-colors">
-            Lupa password? Hubungi Admin
+            Akun belum terverifikasi / Lupa password?
         </button>
         
         <div x-show="showAdmins" 
@@ -42,7 +42,7 @@
                     <li>
                         @php
                             $waNumber = preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', $admin->phone));
-                            $waText = urlencode("Halo Admin {$admin->name}, saya lupa password akun UMKM saya. Mohon bantuannya untuk reset password.");
+                            $waText = urlencode("Halo Admin {$admin->name}, saya mengalami kendala (akun belum diverifikasi / lupa password) pada akun UMKM saya. Mohon bantuannya.");
                         @endphp
                         <a href="https://wa.me/{{ $waNumber }}?text={{ $waText }}" 
                            target="_blank" 
