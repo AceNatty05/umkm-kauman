@@ -15,9 +15,11 @@
         modalOpen: false,
         activeFotos: [],
         activeIdx: 0,
+        imageLoading: true,
         openModal(fotos) {
             this.activeFotos = fotos || [];
             this.activeIdx = 0;
+            this.imageLoading = true;
             this.modalOpen = true;
             document.body.style.overflow = 'hidden';
         },
@@ -26,10 +28,16 @@
             document.body.style.overflow = 'auto';
         },
         next() {
-            if(this.activeIdx < this.activeFotos.length - 1) this.activeIdx++;
+            if(this.activeIdx < this.activeFotos.length - 1) {
+                this.imageLoading = true;
+                this.activeIdx++;
+            }
         },
         prev() {
-            if(this.activeIdx > 0) this.activeIdx--;
+            if(this.activeIdx > 0) {
+                this.imageLoading = true;
+                this.activeIdx--;
+            }
         }
     }">
         @if($infografis->isEmpty())
@@ -78,7 +86,17 @@
                 <!-- Slider -->
                 <div class="relative w-full h-[85vh] flex items-center justify-center p-4">
                     <template x-if="activeFotos.length > 0">
-                        <img :src="'/storage/' + activeFotos[activeIdx]" class="max-w-full max-h-full object-contain rounded-lg shadow-sm">
+                        <div class="relative w-full h-full flex items-center justify-center">
+                            <!-- Loading Spinner -->
+                            <div x-show="imageLoading" class="absolute inset-0 flex items-center justify-center z-10" x-transition>
+                                <div class="w-12 h-12 border-4 border-kauman-primary-light border-t-kauman-primary rounded-full animate-spin"></div>
+                            </div>
+                            <!-- Image -->
+                            <img :src="'/storage/' + activeFotos[activeIdx]" 
+                                 @load="imageLoading = false"
+                                 class="max-w-full max-h-full object-contain rounded-lg shadow-sm transition-opacity duration-300"
+                                 :class="imageLoading ? 'opacity-0' : 'opacity-100'">
+                        </div>
                     </template>
                     <template x-if="activeFotos.length === 0">
                         <div class="flex items-center justify-center w-full h-full">

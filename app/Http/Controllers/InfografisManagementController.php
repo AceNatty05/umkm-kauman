@@ -24,13 +24,19 @@ class InfografisManagementController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB max
+            'foto.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120', // 5MB max
         ]);
 
         $fotoPaths = [];
         if ($request->hasFile('foto')) {
+            $manager = new \Intervention\Image\ImageManager(new \Intervention\Image\Drivers\Gd\Driver());
             foreach ($request->file('foto') as $file) {
-                $path = $file->store('infografis', 'public');
+                $filename = uniqid() . '_' . time() . '.webp';
+                $path = 'infografis/' . $filename;
+                
+                $image = $manager->read($file->getRealPath());
+                $image->toWebp(80)->save(storage_path('app/public/' . $path));
+                
                 $fotoPaths[] = $path;
             }
         }
@@ -52,7 +58,7 @@ class InfografisManagementController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'foto.*' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+            'foto.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'remove_fotos' => 'nullable|array',
         ]);
 
@@ -72,8 +78,14 @@ class InfografisManagementController extends Controller
 
         // Handle new uploads
         if ($request->hasFile('foto')) {
+            $manager = new \Intervention\Image\ImageManager(new \Intervention\Image\Drivers\Gd\Driver());
             foreach ($request->file('foto') as $file) {
-                $path = $file->store('infografis', 'public');
+                $filename = uniqid() . '_' . time() . '.webp';
+                $path = 'infografis/' . $filename;
+                
+                $image = $manager->read($file->getRealPath());
+                $image->toWebp(80)->save(storage_path('app/public/' . $path));
+                
                 $fotoPaths[] = $path;
             }
         }
