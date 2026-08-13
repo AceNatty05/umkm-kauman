@@ -9,6 +9,8 @@ use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\InfografisController;
 use App\Http\Controllers\InfografisManagementController;
+use App\Http\Controllers\TutorialController;
+use App\Http\Controllers\TutorialManagementController;
 use Illuminate\Support\Facades\Route;
 
 // ================================
@@ -17,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/umkm/{slug}', [HomeController::class, 'showUmkm'])->name('public.umkm.show');
 Route::get('/infografis', [InfografisController::class, 'index'])->name('public.infografis.index');
+Route::get('/tutorials', [TutorialController::class, 'index'])->name('public.tutorials.index');
+Route::get('/tutorials/{tutorial}', [TutorialController::class, 'show'])->name('public.tutorials.show');
 
 // ================================
 // Authenticated Routes
@@ -59,6 +63,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('manage/users/{user}/toggle-active', [UserManagementController::class, 'toggleActive'])->name('users.toggle-active');
         Route::resource('manage/users', UserManagementController::class)->names('users');
         Route::resource('manage/infografis', InfografisManagementController::class)->names('manage.infografis');
+        Route::resource('manage/tutorials', TutorialManagementController::class)->names('manage.tutorials');
     });
 });
 

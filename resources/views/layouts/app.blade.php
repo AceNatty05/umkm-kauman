@@ -43,6 +43,10 @@
                            class="px-3.5 py-2 rounded-full text-sm font-medium {{ request()->routeIs('public.infografis.*') ? 'bg-white/20 text-white shadow-inner' : 'text-green-100/80 hover:bg-white/10 hover:text-white' }} transition-all duration-300">
                             Infografis
                         </a>
+                        <a href="{{ route('public.tutorials.index') }}"
+                           class="px-3.5 py-2 rounded-full text-sm font-medium {{ request()->routeIs('public.tutorials.*') ? 'bg-white/20 text-white shadow-inner' : 'text-green-100/80 hover:bg-white/10 hover:text-white' }} transition-all duration-300">
+                            Tutorial
+                        </a>
 
                         @auth
                             <a href="{{ route('umkm.index') }}"
@@ -57,6 +61,10 @@
                                 <a href="{{ route('manage.infografis.index') }}"
                                    class="px-3.5 py-2 rounded-full text-sm font-medium {{ request()->routeIs('manage.infografis.*') ? 'bg-white/20 text-white shadow-inner' : 'text-green-100/80 hover:bg-white/10 hover:text-white' }} transition-all duration-300">
                                     Manajemen Infografis
+                                </a>
+                                <a href="{{ route('manage.tutorials.index') }}"
+                                   class="px-3.5 py-2 rounded-full text-sm font-medium {{ request()->routeIs('manage.tutorials.*') ? 'bg-white/20 text-white shadow-inner' : 'text-green-100/80 hover:bg-white/10 hover:text-white' }} transition-all duration-300">
+                                    Manajemen Tutorial
                                 </a>
                             @endif
                         @endauth
@@ -135,6 +143,7 @@
                 @if(auth()->user()->isAdmin())
                     <a href="{{ route('users.index') }}" class="block px-5 py-2.5 text-green-100 hover:text-white hover:bg-white/10 text-sm transition-colors">Manajemen User</a>
                     <a href="{{ route('manage.infografis.index') }}" class="block px-5 py-2.5 text-green-100 hover:text-white hover:bg-white/10 text-sm transition-colors">Manajemen Infografis</a>
+                    <a href="{{ route('manage.tutorials.index') }}" class="block px-5 py-2.5 text-green-100 hover:text-white hover:bg-white/10 text-sm transition-colors">Manajemen Tutorial</a>
                 @endif
             @endauth
         </div>
@@ -225,6 +234,12 @@
                             <a href="{{ route('public.infografis.index') }}" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2 transition-colors duration-200 group">
                                 <svg class="w-3.5 h-3.5 text-green-300/50 group-hover:text-kauman-primary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                                 Infografis
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('public.tutorials.index') }}" class="text-green-200/70 hover:text-white text-sm flex items-center gap-2 transition-colors duration-200 group">
+                                <svg class="w-3.5 h-3.5 text-green-300/50 group-hover:text-kauman-primary-light transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                Tutorial & Panduan
                             </a>
                         </li>
                     </ul>
