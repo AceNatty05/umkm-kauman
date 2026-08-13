@@ -78,10 +78,40 @@
 
     <!-- Trix Editor JS -->
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
-    <style>
-        /* Sembunyikan tombol upload file di trix karena kita belum implement file upload server-side untuk trix */
-        trix-toolbar [data-trix-button-group="file-tools"] {
-            display: none;
+    <script>
+        document.addEventListener("trix-attachment-add", function(event) {
+            if (event.attachment.file) {
+                uploadFileAttachment(event.attachment);
+            }
+        });
+
+        function uploadFileAttachment(attachment) {
+            var file = attachment.file;
+            var formData = new FormData();
+            formData.append("file", file);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "{{ route('manage.tutorials.upload-image') }}", true);
+            xhr.setRequestHeader("X-CSRF-TOKEN", "{{ csrf_token() }}");
+
+            xhr.upload.onprogress = function(event) {
+                var progress = event.loaded / event.total * 100;
+                attachment.setUploadProgress(progress);
+            };
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    attachment.setAttributes({
+                        url: response.url,
+                        href: response.url
+                    });
+                } else {
+                    console.error("Upload failed");
+                }
+            };
+
+            xhr.send(formData);
         }
-    </style>
+    </script>
 </x-app-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tutorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class TutorialManagementController extends Controller
@@ -64,5 +65,17 @@ class TutorialManagementController extends Controller
     {
         $tutorial->delete();
         return redirect()->route('manage.tutorials.index')->with('success', 'Tutorial berhasil dihapus.');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|max:2048', // max 2MB
+        ]);
+
+        $path = $request->file('file')->store('tutorials', 'public');
+        $url = asset('storage/' . $path);
+
+        return response()->json(['url' => $url]);
     }
 }

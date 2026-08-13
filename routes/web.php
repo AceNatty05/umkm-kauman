@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('manage/users/{user}/toggle-active', [UserManagementController::class, 'toggleActive'])->name('users.toggle-active');
         Route::resource('manage/users', UserManagementController::class)->names('users');
         Route::resource('manage/infografis', InfografisManagementController::class)->names('manage.infografis');
+        Route::post('manage/tutorials/upload-image', [TutorialManagementController::class, 'uploadImage'])->name('manage.tutorials.upload-image');
         Route::resource('manage/tutorials', TutorialManagementController::class)->names('manage.tutorials');
     });
 });
