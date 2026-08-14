@@ -64,11 +64,11 @@
                                     <div class="flex flex-col gap-1.5">
                                         <div class="flex items-center gap-2">
                                             <span class="w-3 h-3 rounded-full border border-gray-300 shadow-inner" style="background-color: #fef3c7;"></span>
-                                            <span class="text-[11px] sm:text-xs text-gray-700 font-semibold">Tahu & Olahan</span>
+                                            <span class="text-[11px] sm:text-xs text-gray-700 font-semibold">Pabrik Tahu</span>
                                         </div>
                                         <div class="flex items-center gap-2">
                                             <span class="w-3 h-3 rounded-full border border-gray-300 shadow-inner" style="background-color: #334155;"></span>
-                                            <span class="text-[11px] sm:text-xs text-gray-700 font-semibold">Bengkel Las</span>
+                                            <span class="text-[11px] sm:text-xs text-gray-700 font-semibold">Bengkel Pengelasan</span>
                                         </div>
                                         <div class="flex items-center gap-2">
                                             <span class="w-3 h-3 rounded-full border border-gray-300 shadow-inner" style="background-color: #bfdbfe;"></span>
