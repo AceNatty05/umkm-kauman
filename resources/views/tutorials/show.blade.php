@@ -52,7 +52,7 @@
                 </div>
             @endif
 
-            <div class="prose prose-olive max-w-none font-sans">
+            <div class="prose prose-olive prose-a:text-kauman-primary hover:prose-a:text-kauman-primary-dark prose-a:font-semibold prose-a:no-underline hover:prose-a:underline max-w-none font-sans">
                 {!! $tutorial->content !!}
             </div>
 
