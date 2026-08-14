@@ -29,10 +29,10 @@
                                    :style="{ backgroundColor: slide.btnBg, color: slide.btnText }">
                                     Jelajahi UMKM <span aria-hidden="true">&rarr;</span>
                                 </a>
-                                <a href="#katalog" 
+                                <a href="{{ route('home', ['tab' => 'produk']) }}#katalog" 
                                    class="inline-flex items-center justify-center gap-2 border font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full transition-all duration-300 hover:bg-black/5"
                                    :style="{ borderColor: slide.textColor, color: slide.textColor }">
-                                    Lihat Peta
+                                    Jelajahi Produk
                                 </a>
                             </div>
                         </div>
@@ -51,11 +51,15 @@
                              x-transition:leave-end="opacity-0 scale-105"
                              class="w-full h-full absolute inset-0 z-10">
                              
-                            <div class="w-full h-full relative rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden shadow-2xl shadow-black/10 group">
-                                <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover object-center transform transition-transform duration-[10000ms] ease-linear group-hover:scale-110" />
+                            <div class="w-full h-full relative overflow-hidden group"
+                                 :class="index === 0 ? 'bg-transparent shadow-none' : 'rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] shadow-2xl shadow-black/10'">
+                                <img :src="slide.image" :alt="slide.title" 
+                                     class="w-full h-full object-center transform transition-transform duration-[10000ms] ease-linear group-hover:scale-105"
+                                     :class="index === 0 ? 'object-contain' : 'object-cover'" />
                                 
                                 <!-- Glassmorphism Caption -->
-                                <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-white/20 backdrop-blur-md border border-white/30 p-4 sm:p-5 rounded-2xl sm:rounded-[1.5rem] text-white transform transition-all duration-500 hover:bg-white/30 shadow-lg">
+                                <div x-show="index !== 0"
+                                     class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-white/20 backdrop-blur-md border border-white/30 p-4 sm:p-5 rounded-2xl sm:rounded-[1.5rem] text-white transform transition-all duration-500 hover:bg-white/30 shadow-lg">
                                     <h4 class="font-bold text-base sm:text-lg lg:text-xl text-shadow-sm" x-text="slide.captionTitle"></h4>
                                     <p class="text-xs sm:text-sm lg:text-base opacity-90 mt-0.5 sm:mt-1 font-medium text-shadow-sm" x-text="slide.captionSubtitle"></p>
                                 </div>
@@ -64,7 +68,7 @@
                     </template>
                     
                     <!-- Floating Badge -->
-                    <div class="absolute -bottom-4 lg:-bottom-6 left-1/2 -translate-x-1/2 z-30">
+                    <div x-show="activeSlide !== 0" class="absolute -bottom-4 lg:-bottom-6 left-1/2 -translate-x-1/2 z-30">
                         <div class="bg-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-xl font-semibold text-xs sm:text-sm text-gray-800 whitespace-nowrap flex items-center gap-2 border border-gray-100 transform hover:-translate-y-1 transition-transform cursor-default">
                             <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                             Dukung Produk Lokal
@@ -237,10 +241,10 @@
                         image: '{{ asset("images/persebaran_umkm_unggulan_kauman.png") }}',
                         captionTitle: 'Jelajahi UMKM Lokal',
                         captionSubtitle: 'Desa Kauman',
-                        bgColor: '#dfd4c5',
-                        textColor: '#4a3f35',
-                        btnBg: '#4a3f35',
-                        btnText: '#ffffff'
+                        bgColor: '#556B2F',
+                        textColor: '#ffffff',
+                        btnBg: '#ffffff',
+                        btnText: '#556B2F'
                     },
                     {
                         subtitle: 'PRODUK LOKAL',
@@ -249,10 +253,10 @@
                         image: '{{ asset("images/umkm_las.png") }}',
                         captionTitle: 'Bengkel Las Kauman',
                         captionSubtitle: 'Desa Kauman',
-                        bgColor: '#e3cc9e',
-                        textColor: '#544123',
-                        btnBg: '#544123',
-                        btnText: '#ffffff'
+                        bgColor: '#334155',
+                        textColor: '#f8fafc',
+                        btnBg: '#f8fafc',
+                        btnText: '#0f172a'
                     },
                     {
                         subtitle: 'JELAJAHI UMKM',
@@ -261,9 +265,9 @@
                         image: '{{ asset("images/umkm_tahu.JPG") }}',
                         captionTitle: 'Produksi Tahu Lokal',
                         captionSubtitle: 'Desa Kauman',
-                        bgColor: '#aabda7',
-                        textColor: '#2a3b2a',
-                        btnBg: '#2a3b2a',
+                        bgColor: '#fef3c7',
+                        textColor: '#78350f',
+                        btnBg: '#78350f',
                         btnText: '#ffffff'
                     },
                     {
@@ -273,9 +277,9 @@
                         image: '{{ asset("images/umkm_konveksi.JPG") }}',
                         captionTitle: 'Konveksi Kauman',
                         captionSubtitle: 'Desa Kauman',
-                        bgColor: '#c5c6c8',
-                        textColor: '#333537',
-                        btnBg: '#333537',
+                        bgColor: '#bfdbfe',
+                        textColor: '#1e3a8a',
+                        btnBg: '#1e3a8a',
                         btnText: '#ffffff'
                     }
                 ],
