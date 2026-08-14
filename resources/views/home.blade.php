@@ -1,34 +1,112 @@
 <x-app-layout>
     <x-slot name="title">UMKM Desa Kauman — Beranda</x-slot>
 
-    <!-- ==================== HERO ==================== -->
-    <section class="hero-animated-gradient relative text-white py-16 sm:py-24 overflow-hidden">
-        <!-- Floating Blobs -->
-        <div class="hero-blob w-72 h-72 bg-kauman-primary-light/40 -top-20 -left-20" style="animation-delay: 0s;"></div>
-        <div class="hero-blob w-96 h-96 bg-olive-400/30 -bottom-32 -right-16" style="animation-delay: 3s;"></div>
-        <div class="hero-blob w-48 h-48 bg-kauman-accent/20 top-1/2 left-1/3" style="animation-delay: 5s;"></div>
+    <!-- ==================== HERO CAROUSEL ==================== -->
+    <section x-data="heroCarousel()" class="relative w-full overflow-hidden transition-colors duration-700 ease-in-out font-sans" :style="{ backgroundColor: currentSlideData.bgColor, color: currentSlideData.textColor }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 relative z-10 flex flex-col justify-center min-h-[calc(100vh-80px)] lg:min-h-0">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center flex-1">
+                <!-- Left Text Content -->
+                <div class="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 relative min-h-[280px] sm:min-h-[260px] lg:min-h-[320px]">
+                    <template x-for="(slide, index) in slides" :key="index">
+                        <div x-show="activeSlide === index" 
+                             x-transition:enter="transition ease-out duration-700 delay-150"
+                             x-transition:enter-start="opacity-0 translate-y-8"
+                             x-transition:enter-end="opacity-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-300 absolute top-0 left-0 w-full"
+                             x-transition:leave-start="opacity-100"
+                             x-transition:leave-end="opacity-0 -translate-y-4"
+                             class="w-full pt-2 lg:pt-0">
+                             
+                            <h3 class="text-xs sm:text-sm font-bold tracking-widest uppercase mb-3 sm:mb-4 opacity-90" x-text="slide.subtitle"></h3>
+                            <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold mb-4 sm:mb-6 leading-[1.1] tracking-tight" x-text="slide.title"></h1>
+                            <p class="text-base sm:text-lg mb-6 sm:mb-8 max-w-lg leading-relaxed opacity-85" x-text="slide.description"></p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-wrap gap-3 sm:gap-4 relative z-20">
+                                <a href="{{ route('home', ['tab' => 'umkm']) }}#katalog" 
+                                   class="inline-flex items-center justify-center gap-2 font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full shadow-lg shadow-black/5 transition-all duration-300 hover:scale-105 active:scale-95"
+                                   :style="{ backgroundColor: slide.btnBg, color: slide.btnText }">
+                                    Jelajahi UMKM <span aria-hidden="true">&rarr;</span>
+                                </a>
+                                <a href="#katalog" 
+                                   class="inline-flex items-center justify-center gap-2 border font-semibold px-6 sm:px-8 py-3 sm:py-3.5 rounded-full transition-all duration-300 hover:bg-black/5"
+                                   :style="{ borderColor: slide.textColor, color: slide.textColor }">
+                                    Lihat Peta
+                                </a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm text-green-100 mb-6 border border-white/10">
-                <svg class="w-4 h-4 text-kauman-primary-light" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
-                Desa Kauman, Kec. Comal, Kab. Pemalang
+                <!-- Right Image Content -->
+                <div class="lg:col-span-7 relative h-[300px] sm:h-[450px] lg:h-[550px] xl:h-[600px] order-1 lg:order-2 w-full mt-4 lg:mt-0">
+                    <template x-for="(slide, index) in slides" :key="index">
+                        <div x-show="activeSlide === index"
+                             x-transition:enter="transition ease-out duration-1000"
+                             x-transition:enter-start="opacity-0 scale-95 translate-x-8"
+                             x-transition:enter-end="opacity-100 scale-100 translate-x-0"
+                             x-transition:leave="transition ease-in duration-500 absolute inset-0 z-0"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-105"
+                             class="w-full h-full absolute inset-0 z-10">
+                             
+                            <div class="w-full h-full relative rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden shadow-2xl shadow-black/10 group">
+                                <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover object-center transform transition-transform duration-[10000ms] ease-linear group-hover:scale-110" />
+                                
+                                <!-- Glassmorphism Caption -->
+                                <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-white/20 backdrop-blur-md border border-white/30 p-4 sm:p-5 rounded-2xl sm:rounded-[1.5rem] text-white transform transition-all duration-500 hover:bg-white/30 shadow-lg">
+                                    <h4 class="font-bold text-base sm:text-lg lg:text-xl text-shadow-sm" x-text="slide.captionTitle"></h4>
+                                    <p class="text-xs sm:text-sm lg:text-base opacity-90 mt-0.5 sm:mt-1 font-medium text-shadow-sm" x-text="slide.captionSubtitle"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 lg:-bottom-6 left-1/2 -translate-x-1/2 z-30">
+                        <div class="bg-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-xl font-semibold text-xs sm:text-sm text-gray-800 whitespace-nowrap flex items-center gap-2 border border-gray-100 transform hover:-translate-y-1 transition-transform cursor-default">
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            Dukung Produk Lokal
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 tracking-tight leading-tight">
-                Belanja Langsung dari <span class="text-kauman-primary-light">Pengrajin Lokal</span>
-            </h1>
-            <p class="text-lg sm:text-xl text-green-100/80 max-w-2xl mx-auto leading-relaxed">
-                Dari tangan terampil warga Desa Kauman, hadir produk berkualitas yang siap Anda jelajahi. Kenali usahanya, hubungi langsung, dan dukung ekonomi desa!
-            </p>
-            <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a href="{{ route('home', ['tab' => 'produk']) }}#katalog" class="inline-flex items-center gap-2 bg-white text-kauman-primary font-semibold px-7 py-3 rounded-full shadow-lg shadow-black/10 hover:shadow-xl hover:bg-olive-50 transition-all duration-300 hover:-translate-y-0.5">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    Jelajahi Produk
-                </a>
-                <a href="{{ route('home', ['tab' => 'umkm']) }}#katalog" class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white font-semibold px-7 py-3 rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-0.5">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    Lihat Daftar UMKM
-                </a>
+            
+            <!-- Pagination & Controls -->
+            <div class="flex items-center justify-between mt-12 sm:mt-16 lg:mt-12 pt-6 sm:pt-8 w-full z-20">
+                <!-- Counter -->
+                <div class="flex items-end gap-1.5 sm:gap-2 font-medium w-1/3">
+                    <span class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tighter" x-text="String(activeSlide + 1).padStart(2, '0')"></span>
+                    <span class="text-xs sm:text-sm lg:text-base opacity-50 pb-0.5 sm:pb-1 font-bold" x-text="'/ ' + String(slides.length).padStart(2, '0')"></span>
+                </div>
+                
+                <!-- Dots -->
+                <div class="flex gap-1.5 sm:gap-2 lg:gap-3 justify-center w-1/3">
+                    <template x-for="(slide, index) in slides" :key="index">
+                        <button @click="goTo(index)" 
+                                class="h-1 sm:h-1.5 rounded-full transition-all duration-500 ease-out hover:opacity-80" 
+                                :class="activeSlide === index ? 'w-6 sm:w-8 lg:w-12' : 'w-1.5 sm:w-2 lg:w-3 opacity-30'"
+                                :style="{ backgroundColor: currentSlideData.textColor }">
+                        </button>
+                    </template>
+                </div>
+                
+                <!-- Arrows -->
+                <div class="flex gap-2 sm:gap-3 lg:gap-4 justify-end w-1/3">
+                    <button @click="prev" 
+                            class="w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-black/5" 
+                            :style="{ borderColor: currentSlideData.textColor, color: currentSlideData.textColor }">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <button @click="next" 
+                            class="w-9 h-9 sm:w-11 sm:h-11 lg:w-14 lg:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 hover:bg-black/5" 
+                            :style="{ borderColor: currentSlideData.textColor, color: currentSlideData.textColor }">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    </button>
+                </div>
             </div>
+            
         </div>
     </section>
 
@@ -147,6 +225,90 @@
 
     <!-- ==================== AJAX Script ==================== -->
     <script>
+        function heroCarousel() {
+            return {
+                activeSlide: 0,
+                autoplayInterval: null,
+                slides: [
+                    {
+                        subtitle: 'POTENSI DESA',
+                        title: 'Kenali UMKM di Desa Kauman',
+                        description: '[Deskripsi perkenalan potensi UMKM Desa Kauman (las, tahu, konveksi) dapat Anda isi di sini...]',
+                        image: '{{ asset("images/persebaran_umkm_unggulan_kauman.png") }}',
+                        captionTitle: 'Jelajahi UMKM Lokal',
+                        captionSubtitle: 'Desa Kauman',
+                        bgColor: '#dfd4c5',
+                        textColor: '#4a3f35',
+                        btnBg: '#4a3f35',
+                        btnText: '#ffffff'
+                    },
+                    {
+                        subtitle: 'PRODUK LOKAL',
+                        title: 'Industri Las & Rekayasa Logam',
+                        description: '[Deskripsi mengenai UMKM Bengkel Las dapat Anda isi di sini...]',
+                        image: '{{ asset("images/umkm_las.png") }}',
+                        captionTitle: 'Bengkel Las Kauman',
+                        captionSubtitle: 'Desa Kauman',
+                        bgColor: '#e3cc9e',
+                        textColor: '#544123',
+                        btnBg: '#544123',
+                        btnText: '#ffffff'
+                    },
+                    {
+                        subtitle: 'JELAJAHI UMKM',
+                        title: 'Pusat Pembuatan Tahu Segar',
+                        description: '[Deskripsi mengenai UMKM Produksi Tahu dapat Anda isi di sini...]',
+                        image: '{{ asset("images/umkm_tahu.JPG") }}',
+                        captionTitle: 'Produksi Tahu Lokal',
+                        captionSubtitle: 'Desa Kauman',
+                        bgColor: '#aabda7',
+                        textColor: '#2a3b2a',
+                        btnBg: '#2a3b2a',
+                        btnText: '#ffffff'
+                    },
+                    {
+                        subtitle: 'DUKUNG UMKM LOKAL',
+                        title: 'Industri Konveksi Pakaian',
+                        description: '[Deskripsi mengenai UMKM Konveksi dapat Anda isi di sini...]',
+                        image: '{{ asset("images/umkm_konveksi.JPG") }}',
+                        captionTitle: 'Konveksi Kauman',
+                        captionSubtitle: 'Desa Kauman',
+                        bgColor: '#c5c6c8',
+                        textColor: '#333537',
+                        btnBg: '#333537',
+                        btnText: '#ffffff'
+                    }
+                ],
+                get currentSlideData() {
+                    return this.slides[this.activeSlide];
+                },
+                next() {
+                    this.activeSlide = (this.activeSlide === this.slides.length - 1) ? 0 : this.activeSlide + 1;
+                    this.resetAutoplay();
+                },
+                prev() {
+                    this.activeSlide = (this.activeSlide === 0) ? this.slides.length - 1 : this.activeSlide - 1;
+                    this.resetAutoplay();
+                },
+                goTo(index) {
+                    this.activeSlide = index;
+                    this.resetAutoplay();
+                },
+                startAutoplay() {
+                    this.autoplayInterval = setInterval(() => {
+                        this.activeSlide = (this.activeSlide === this.slides.length - 1) ? 0 : this.activeSlide + 1;
+                    }, 5000);
+                },
+                resetAutoplay() {
+                    clearInterval(this.autoplayInterval);
+                    this.startAutoplay();
+                },
+                init() {
+                    this.startAutoplay();
+                }
+            }
+        }
+
         function katalog() {
             return {
                 loading: false,
