@@ -57,6 +57,26 @@
                                      class="w-full h-full object-center transform transition-transform duration-[10000ms] ease-linear group-hover:scale-105"
                                      :class="index === 0 ? 'object-contain' : 'object-cover'" />
                                 
+                                <!-- Legend Overlay for Map (Index 0) -->
+                                <div x-show="index === 0" 
+                                     class="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 bg-white/80 backdrop-blur-md border border-white/50 p-3 rounded-xl shadow-lg z-20">
+                                    <h5 class="text-[10px] sm:text-xs font-bold text-gray-800 mb-1.5 uppercase tracking-wider">Legenda Peta:</h5>
+                                    <div class="flex flex-col gap-1.5">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-3 h-3 rounded-full border border-gray-300 shadow-inner" style="background-color: #fef3c7;"></span>
+                                            <span class="text-[11px] sm:text-xs text-gray-700 font-semibold">Tahu & Olahan</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-3 h-3 rounded-full border border-gray-300 shadow-inner" style="background-color: #334155;"></span>
+                                            <span class="text-[11px] sm:text-xs text-gray-700 font-semibold">Bengkel Las</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-3 h-3 rounded-full border border-gray-300 shadow-inner" style="background-color: #bfdbfe;"></span>
+                                            <span class="text-[11px] sm:text-xs text-gray-700 font-semibold">Konveksi</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Glassmorphism Caption -->
                                 <div x-show="index !== 0"
                                      class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-white/20 backdrop-blur-md border border-white/30 p-4 sm:p-5 rounded-2xl sm:rounded-[1.5rem] text-white transform transition-all duration-500 hover:bg-white/30 shadow-lg">
