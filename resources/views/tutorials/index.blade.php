@@ -42,13 +42,9 @@
                                 <span class="text-xs text-gray-400">{{ $tutorial->created_at->translatedFormat('d M Y') }}</span>
                             </div>
                             
-                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-kauman-primary transition-colors mb-2 line-clamp-2">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-kauman-primary transition-colors mb-4 line-clamp-2 flex-grow">
                                 {{ $tutorial->title }}
                             </h3>
-                            
-                            <p class="text-gray-500 text-sm mb-4 line-clamp-3 flex-grow">
-                                {{ Str::limit(strip_tags($tutorial->content), 120) }}
-                            </p>
                             
                             <div class="flex items-center text-sm font-medium text-kauman-primary group-hover:text-kauman-primary-dark mt-auto">
                                 Baca selengkapnya
