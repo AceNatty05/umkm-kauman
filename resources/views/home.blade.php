@@ -259,7 +259,7 @@
                         title: 'Kenali UMKM di Desa Kauman',
                         description: 'Desa Kauman di Kecamatan Comal, Pemalang, memiliki tiga UMKM unggulan: industri tahu dan olahan sampingannya, konveksi, dan jasa bengkel pengelasan. Jelajahi peta persebaran UMKM di Desa Kauman dan dukung ekonomi lokal.',
                         image: '{{ asset("images/persebaran_umkm_unggulan_kauman.png") }}',
-                        captionTitle: 'UMKM di Desa Kauman',
+                        captionTitle: 'Peta Persebaran Tiga UMKM Unggulan',
                         captionSubtitle: 'Desa Kauman',
                         bgColor: '#556B2F',
                         textColor: '#ffffff',
@@ -267,11 +267,11 @@
                         btnText: '#556B2F'
                     },
                     {
-                        subtitle: 'PRODUK LOKAL',
-                        title: 'Industri Las & Rekayasa Logam',
+                        subtitle: 'Bengkel Pengelasan',
+                        title: 'Jasa Bengkel Pengelasan',
                         description: 'Menyediakan layanan jasa pengelasan logam berkualitas, mulai dari pembuatan pagar, kanopi, hingga konstruksi kustom. Karya tangan terampil warga Desa Kauman.',
                         image: '{{ asset("images/umkm_las.png") }}',
-                        captionTitle: 'Bengkel Las Kauman',
+                        captionTitle: 'Contoh Produk Pengelasan',
                         captionSubtitle: 'Desa Kauman',
                         bgColor: '#334155',
                         textColor: '#f8fafc',
@@ -279,7 +279,7 @@
                         btnText: '#0f172a'
                     },
                     {
-                        subtitle: 'JELAJAHI UMKM',
+                        subtitle: 'Pabrik Tahu',
                         title: 'Pusat Pembuatan Tahu Segar',
                         description: 'Sebagai sentra pembuatan tahu, Desa Kauman memproduksi tahu segar setiap harinya dari kedelai pilihan. Terdapat beberapa jenis tahu yang ditawarkan seperti: tahu putih, tahu kuning, tahu goreng, dsb. Produk olahan sampingan dari tahu (seperti tempe gembus) juga diproduksi di sini',
                         image: '{{ asset("images/umkm_tahu.JPG") }}',
@@ -291,11 +291,11 @@
                         btnText: '#ffffff'
                     },
                     {
-                        subtitle: 'DUKUNG UMKM LOKAL',
+                        subtitle: 'Konveksi',
                         title: 'Industri Konveksi Pakaian',
                         description: 'Terdapat konveksi celana kantoran, celana kolor, daster, dsb yang memadukan kerapian jahitan tingkat tinggi dengan bahan berkualitas. Siap menerima pesanan dengan harga bersaing.',
                         image: '{{ asset("images/umkm_konveksi.JPG") }}',
-                        captionTitle: 'Konveksi Kauman',
+                        captionTitle: 'Konveksi Celana KantoranKauman',
                         captionSubtitle: 'Desa Kauman',
                         bgColor: '#bfdbfe',
                         textColor: '#1e3a8a',
