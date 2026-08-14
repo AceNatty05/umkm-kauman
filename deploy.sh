@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Reset any local changes to avoid merge conflicts
+git reset --hard HEAD
+git clean -df
+
 # Update codebase
 git pull
 
