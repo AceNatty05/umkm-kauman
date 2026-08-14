@@ -79,7 +79,7 @@
 
                                 <!-- Glassmorphism Caption -->
                                 <div x-show="index !== 0"
-                                     class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-white/20 backdrop-blur-md border border-white/30 p-4 sm:p-5 rounded-2xl sm:rounded-[1.5rem] text-white transform transition-all duration-500 hover:bg-white/30 shadow-lg">
+                                     class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-black/40 backdrop-blur-md border border-white/20 p-4 sm:p-5 rounded-2xl sm:rounded-[1.5rem] text-white transform transition-all duration-500 hover:bg-black/50 shadow-lg">
                                     <h4 class="font-bold text-base sm:text-lg lg:text-xl text-shadow-sm" x-text="slide.captionTitle"></h4>
                                     <p class="text-xs sm:text-sm lg:text-base opacity-90 mt-0.5 sm:mt-1 font-medium text-shadow-sm" x-text="slide.captionSubtitle"></p>
                                 </div>
@@ -295,7 +295,7 @@
                         title: 'Industri Konveksi Pakaian',
                         description: 'Terdapat konveksi celana kantoran, celana kolor, daster, dsb yang memadukan kerapian jahitan tingkat tinggi dengan bahan berkualitas. Siap menerima pesanan dengan harga bersaing.',
                         image: '{{ asset("images/umkm_konveksi.JPG") }}',
-                        captionTitle: 'Konveksi Celana KantoranKauman',
+                        captionTitle: 'Konveksi Celana Kantoran',
                         captionSubtitle: 'Desa Kauman',
                         bgColor: '#bfdbfe',
                         textColor: '#1e3a8a',
