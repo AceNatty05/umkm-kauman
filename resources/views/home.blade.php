@@ -134,6 +134,83 @@
         </div>
     </section>
 
+    <!-- ==================== INFOGRAFIS SECTION ==================== -->
+    <section class="w-full bg-olive-50 py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left: Visual (Phone Mockup/Cards) -->
+                <div class="order-2 lg:order-1 flex justify-center lg:justify-start reveal-on-scroll">
+                    <div class="w-full max-w-md bg-white rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-10 shadow-xl shadow-olive-900/5 relative overflow-hidden flex flex-col items-center justify-center min-h-[400px]">
+                        <!-- Simple CSS Phone Mockup -->
+                        <div class="relative w-64 h-[420px] bg-gray-50 border-[6px] border-gray-800 rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col">
+                            <!-- Phone Notch -->
+                            <div class="absolute top-0 inset-x-0 h-5 bg-gray-800 rounded-b-xl w-28 mx-auto z-20"></div>
+                            
+                            <!-- Phone Screen Content -->
+                            <div class="flex-1 bg-gradient-to-br from-kauman-primary to-olive-600 p-4 pt-8 text-white relative overflow-hidden">
+                                <!-- Abstract Infographic Elements -->
+                                <div class="w-full h-8 bg-white/20 rounded-md mb-4 backdrop-blur-sm border border-white/30"></div>
+                                <div class="grid grid-cols-2 gap-3 mb-4">
+                                    <div class="h-24 bg-white/20 rounded-lg backdrop-blur-sm border border-white/30 p-2 flex flex-col gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-amber-300/80"></div>
+                                        <div class="w-full h-2 bg-white/30 rounded"></div>
+                                        <div class="w-2/3 h-2 bg-white/30 rounded"></div>
+                                    </div>
+                                    <div class="h-24 bg-white/20 rounded-lg backdrop-blur-sm border border-white/30 p-2 flex flex-col gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-blue-300/80"></div>
+                                        <div class="w-full h-2 bg-white/30 rounded"></div>
+                                        <div class="w-2/3 h-2 bg-white/30 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="w-full h-20 bg-white/20 rounded-lg backdrop-blur-sm border border-white/30 p-3 flex gap-3 items-center">
+                                    <div class="w-10 h-10 rounded-full border-[3px] border-amber-300 border-t-transparent animate-spin"></div>
+                                    <div class="flex-1 space-y-2">
+                                        <div class="w-full h-2 bg-white/30 rounded"></div>
+                                        <div class="w-full h-2 bg-white/30 rounded"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Decorative blobs -->
+                                <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-kauman-accent/40 rounded-full blur-xl"></div>
+                                <div class="absolute top-1/3 -left-8 w-20 h-20 bg-white/30 rounded-full blur-xl"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating decoration -->
+                        <div class="absolute top-12 -right-4 w-12 h-12 bg-amber-100 rounded-full shadow-lg flex items-center justify-center animate-bounce" style="animation-duration: 3s;">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Text Content -->
+                <div class="order-1 lg:order-2 flex flex-col justify-center reveal-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-px bg-kauman-primary"></div>
+                        <h3 class="text-xs sm:text-sm font-bold tracking-[0.2em] text-kauman-primary uppercase">Edukasi & Panduan</h3>
+                    </div>
+                    
+                    <h2 class="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold text-gray-900 mb-6 leading-[1.1] tracking-tight">
+                        Akses ke Banyak <br class="hidden sm:block" /> <span class="text-kauman-primary">Infografis</span>.
+                    </h2>
+                    
+                    <p class="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed max-w-xl">
+                        Kami dari Tim KKN Undip 2026 menyediakan banyak infografis mengenai pengelolaan UMKM di web UMKM Kauman. Infografis berupa poster, leaflet, modul dan sebagainya yang sudah disiapkan oleh masing-masing anggota tim. Harapannya infografis-infografis tersebut dapat memberikan ilmu yang bermanfaat bagi pengguna web UMKM Kauman khususnya para pelaku UMKM lokal.
+                    </p>
+                    
+                    <div class="flex">
+                        <a href="{{ route('public.infografis.index') }}" class="group inline-flex items-center gap-3 border border-gray-300 text-gray-700 font-semibold px-7 sm:px-8 py-3 sm:py-3.5 rounded-full hover:border-kauman-primary hover:text-kauman-primary hover:bg-kauman-primary/5 transition-all duration-300">
+                            Jelajahi Infografis
+                            <svg class="w-4 h-4 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         <!-- ==================== PRODUK UNGGULAN ==================== -->
